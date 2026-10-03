@@ -35,3 +35,15 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.year-block { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 14px; }
+.year-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.year-head h3 { margin: 0; font-size: 15px; }
+.year-actions { margin-left: auto; display: flex; gap: 8px; }
+.seal-note { font-size: 12px; color: var(--muted); margin: 0 0 8px; }
+.sealed-chip { background: #dcfae6; color: #067647; }
+.stale-chip { background: #fee4e2; color: #b42318; }
+.stale-text { color: #b42318; }
+.ok-text { color: #067647; font-size: 13px; }
+.reviewer-missing { display: inline-flex; gap: 6px; align-items: center; }
+.reviewer-missing input { width: 90px; padding: 2px 6px; border: 1px solid var(--border); border-radius: 4px; }
+.btn:disabled { opacity: 0.5; cursor: default; }

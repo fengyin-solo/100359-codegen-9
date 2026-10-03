@@ -1,3 +1,4 @@
+import { buildSnapshot, loadCriteria } from '@/api/annual-review'
 import { MODULE_BY_KEY } from '@/data/modules'
 import { allRows, listRows, resetRows, saveRows } from '@/data/local-store'
 import type { ActionResult, EntryRow, ModuleMeta, OverviewResult, PageResult } from '@/data/types'
@@ -49,6 +50,13 @@ export function runAction(key: string, id: number, action: string): ActionResult
     status: target,
     pending: target !== lastStatus,
     abnormal: NEGATIVE_ACTIONS.some((verb) => action.startsWith(verb)),
+  }
+  // 整编成果刊印时定格审核快照：之后口径变更只影响未刊印成果。
+  if (key === 'compilation' && target === '已刊印') {
+    const criteria = loadCriteria()
+    updated['口径版本'] = criteria.version
+    updated['审核快照'] = buildSnapshot(updated, criteria)
+    updated['需重算'] = false
   }
   const next = [...rows]
   next[index] = updated

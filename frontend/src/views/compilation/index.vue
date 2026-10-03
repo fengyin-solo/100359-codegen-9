@@ -7,6 +7,7 @@
       </div>
       <div class="page-actions">
         <button class="btn primary" type="button" @click="openCreate">登记整编成果</button>
+        <button class="btn" type="button" @click="openReview">年度审阅视图</button>
         <button class="btn" type="button" @click="exportRows">导出数据整编清单</button>
       </div>
     </header>
@@ -72,6 +73,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import {
   downloadEntries,
@@ -81,9 +83,10 @@ import {
 } from '@/api/local-service'
 import type { EntryRow } from '@/data/types'
 
+const router = useRouter()
 const meta = moduleMeta('compilation')
-const columns = ["成果编号", "整编年份", "站点编号", "整编类型", "原始记录数", "整编人", "审核人", "整编状态"]
-const actions = ["开始整编", "提交审核", "驳回整编"]
+const columns = ["成果编号", "整编年份", "站点编号", "整编类型", "原始记录数", "应有记录数", "整编人", "审核人", "整编状态"]
+const actions = ["开始整编", "提交审核", "确认刊印", "驳回整编"]
 const statuses = ["待整编", "整编中", "待审核", "已刊印", "已驳回"]
 const stats = [{"label": "待整编年度", "value": 0}, {"label": "整编中年度", "value": 0}, {"label": "已刊印成果", "value": 0}]
 
@@ -110,6 +113,10 @@ function exportRows() {
 
 function openCreate() {
   errorMessage.value = '整编成果登记入口尚未接入审批流'
+}
+
+function openReview() {
+  router.push('/compilation/review')
 }
 
 function runAction(action: string, row: EntryRow) {
